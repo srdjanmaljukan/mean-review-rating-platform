@@ -1,0 +1,16 @@
+<a class="title-card" [routerLink]="['/title', result().mediaType, result().id]">
+  <img
+    *ngIf="result().posterPath; else noPoster"
+    [src]="result().posterPath"
+    [alt]="result().title"
+  />
+  <ng-template #noPoster>
+    <div class="no-poster">No image</div>
+  </ng-template>
+
+  <div class="info">
+    <span class="media-type">{{ result().mediaType }}</span>
+    <h3>{{ result().title }}</h3>
+    <p *ngIf="result().releaseDate">{{ result().releaseDate }}</p>
+  </div>
+</a>

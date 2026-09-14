@@ -1,1 +1,30 @@
-<p>search works!</p>
+<div class="search-container">
+  <h2>Search movies, TV shows, games, anime & manga</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      (keyup.enter)="onSearch()"
+      placeholder="Search titles..."
+    />
+
+    <select [(ngModel)]="selectedType">
+      <option *ngFor="let type of mediaTypes" [value]="type.value">
+        {{ type.label }}
+      </option>
+    </select>
+
+    <button (click)="onSearch()">Search</button>
+  </div>
+
+  <p *ngIf="loading()">Loading...</p>
+
+  <div class="results-grid" *ngIf="!loading() && results().length > 0">
+    <app-title-card *ngFor="let result of results()" [result]="result" />
+  </div>
+
+  <p *ngIf="!loading() && hasSearched() && results().length === 0">
+    No results found.
+  </p>
+</div>

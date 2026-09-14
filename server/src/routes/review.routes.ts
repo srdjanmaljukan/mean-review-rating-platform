@@ -5,10 +5,12 @@ import {
   getReviewsForTitle,
   updateReview,
   deleteReview,
+  getReviewById
 } from '../controllers/review.controller';
 
 const router = Router();
 
+router.get('/:id', getReviewById);
 router.get('/title/:titleId', getReviewsForTitle);   // public — anyone can view reviews
 router.post('/', authenticate, createReview);         // protected
 router.put('/:id', authenticate, updateReview);        // protected

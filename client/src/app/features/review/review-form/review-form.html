@@ -1,1 +1,21 @@
-<p>review-form works!</p>
+<div class="review-form-container">
+  <h2>{{ isEditMode() ? 'Edit your review' : 'Write a review' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="rating">Rating (1-10)</label>
+      <input id="rating" type="number" min="1" max="10" formControlName="rating" />
+    </div>
+
+    <div class="field">
+      <label for="text">Review</label>
+      <textarea id="text" rows="6" formControlName="text"></textarea>
+    </div>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode() ? 'Update' : 'Submit' }}
+    </button>
+  </form>
+</div>

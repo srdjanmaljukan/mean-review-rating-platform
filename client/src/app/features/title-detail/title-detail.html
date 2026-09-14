@@ -1,1 +1,51 @@
-<p>title-detail works!</p>
+<div class="title-detail" *ngIf="!loading(); else loadingTpl">
+  <ng-container *ngIf="title() as t">
+    <div class="header">
+      <img *ngIf="t.posterPath" [src]="t.posterPath" [alt]="t.title" />
+      <div class="info">
+        <span class="media-type">{{ t.mediaType }}</span>
+        <h1>{{ t.title }}</h1>
+        <p *ngIf="t.releaseDate">{{ t.releaseDate }}</p>
+        <p class="overview">{{ t.overview }}</p>
+
+        <p *ngIf="averageRating() !== null" class="average-rating">
+          Average rating: {{ averageRating() }}/10 ({{ reviews().length }} review{{ reviews().length === 1 ? '' : 's' }})
+        </p>
+
+        
+  <a *ngIf="authService.isLoggedIn()"
+  [routerLink]="['/review/new', t._id]"
+  class="write-review-btn"
+>
+  Write a review
+</a>
+<a *ngIf="!authService.isLoggedIn()" routerLink="/login">
+  Log in to write a review
+</a>
+      </div>
+    </div>
+
+    <div class="reviews">
+      <h2>Reviews</h2>
+
+      <p *ngIf="reviews().length === 0">No reviews yet — be the first!</p>
+
+      <div class="review" *ngFor="let review of reviews()">
+        <div class="review-header">
+          <strong>{{ reviewUsername(review) }}</strong>
+          <span class="rating">{{ review.rating }}/10</span>
+        </div>
+        <p>{{ review.text }}</p>
+
+        <div class="review-actions" *ngIf="isOwnReview(review)">
+          <a [routerLink]="['/review/edit', review._id]">Edit</a>
+          <button (click)="deleteReview(review._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loadingTpl>
+  <p>Loading...</p>
+</ng-template>
