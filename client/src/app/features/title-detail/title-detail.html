@@ -5,44 +5,61 @@
       <div class="info">
         <span class="media-type">{{ t.mediaType }}</span>
         <h1>{{ t.title }}</h1>
-        <p *ngIf="t.releaseDate">{{ t.releaseDate }}</p>
+        <p *ngIf="t.releaseDate" class="release-date">{{ t.releaseDate }}</p>
         <p class="overview">{{ t.overview }}</p>
 
-        <p *ngIf="averageRating() !== null" class="average-rating">
-          Average rating: {{ averageRating() }}/10 ({{ reviews().length }} review{{
-            reviews().length === 1 ? '' : 's'
-          }})
-        </p>
+        <div class="average-rating" *ngIf="averageRating() !== null">
+          <span class="rating-stamp">{{ averageRating() }}</span>
+          <span class="rating-caption"
+            >{{ reviews().length }} review{{ reviews().length === 1 ? '' : 's' }}</span
+          >
+        </div>
 
-        <a
-          *ngIf="authService.isLoggedIn()"
-          [routerLink]="['/review/new', t._id]"
-          [state]="{ mediaType: t.mediaType, externalId: t.externalId }"
-          class="write-review-btn"
-        >
-          Write a review
-        </a>
-        <a *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']" [queryParams]="{ returnUrl: '/title/' + t.mediaType + '/' + t.externalId }">
-  Log in to write a review
-</a>
+        <div class="action-buttons">
+          <a
+            *ngIf="authService.isLoggedIn()"
+            [routerLink]="['/review/new', t._id]"
+            [state]="{ mediaType: t.mediaType, externalId: t.externalId }"
+            class="write-review-btn"
+            >Write a review</a
+          >
+          <a
+            *ngIf="!authService.isLoggedIn()"
+            [routerLink]="['/login']"
+            [queryParams]="{ returnUrl: '/title/' + t.mediaType + '/' + t.externalId }"
+            class="write-review-btn"
+            >Log in to write a review</a
+          >
+
+          <button
+            *ngIf="authService.isLoggedIn()"
+            (click)="toggleWatchlist()"
+            [disabled]="watchlistBusy()"
+            class="watchlist-btn"
+            [class.active]="isWatchlisted()"
+          >
+            {{ isWatchlisted() ? '✓ In Collection' : '+ Add to Collection' }}
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="reviews">
       <h2>Reviews</h2>
 
-      <p *ngIf="reviews().length === 0">No reviews yet — be the first!</p>
+      <p *ngIf="reviews().length === 0" class="empty-state">No reviews yet — be the first!</p>
 
       <div class="review" *ngFor="let review of reviews()">
-        <div class="review-header">
-          <strong>{{ reviewUsername(review) }}</strong>
-          <span class="rating">{{ review.rating }}/10</span>
-        </div>
-        <p>{{ review.text }}</p>
-
-        <div class="review-actions" *ngIf="isOwnReview(review)">
-          <a [routerLink]="['/review/edit', review._id]">Edit</a>
-          <button (click)="deleteReview(review._id)">Delete</button>
+        <span class="rating-stamp">{{ review.rating }}</span>
+        <div class="review-body">
+          <div class="review-header">
+            <strong>{{ reviewUsername(review) }}</strong>
+          </div>
+          <p>{{ review.text }}</p>
+          <div class="review-actions" *ngIf="isOwnReview(review)">
+            <a [routerLink]="['/review/edit', review._id]">Edit</a>
+            <button (click)="deleteReview(review._id)">Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,5 +67,5 @@
 </div>
 
 <ng-template #loadingTpl>
-  <p>Loading...</p>
+  <p class="loading-state">Loading...</p>
 </ng-template>

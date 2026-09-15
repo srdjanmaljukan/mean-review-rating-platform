@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth.routes';
 import titleRoutes from './routes/title.routes';
 import reviewRoutes from './routes/review.routes';
+import watchlistRoutes from './routes/watchlist.routes';
 
 const app: Application = express();
 
@@ -19,5 +20,6 @@ app.get('/api/health', (req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/titles', titleRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/watchlist', watchlistRoutes);
 
 export default app;

@@ -1,0 +1,23 @@
+<div class="watchlist-container">
+  <h2>My Collection</h2>
+
+  <p *ngIf="loading()" class="loading-state">Loading...</p>
+
+  <p *ngIf="!loading() && items().length === 0" class="empty-state">
+    Your collection is empty — browse titles and add some.
+  </p>
+
+  <div class="watchlist-grid" *ngIf="!loading() && items().length > 0">
+    <div class="watchlist-item" *ngFor="let item of items()">
+      <a [routerLink]="['/title', item.title.mediaType, item.title.externalId]">
+        <img *ngIf="item.title.posterPath" [src]="item.title.posterPath" [alt]="item.title.title" />
+        <div class="no-poster" *ngIf="!item.title.posterPath">No image</div>
+        <div class="info">
+          <span class="media-type">{{ item.title.mediaType }}</span>
+          <h3>{{ item.title.title }}</h3>
+        </div>
+      </a>
+      <button (click)="remove(item.title._id)">Remove</button>
+    </div>
+  </div>
+</div>

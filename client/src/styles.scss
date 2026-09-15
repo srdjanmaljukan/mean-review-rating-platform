@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ink: #14181C;
+  --paper: #F7F4EC;
+  --paper-shade: #E4DFD1;
+  --stamp-gold: #C9A227;
+  --ticket-red: #8B3A3A;
+  --muted-ink: #6B7280;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-sm: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+// Reusable "stamp" rating badge — used across title-card, title-detail, reviews
+.rating-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--stamp-gold);
+  border-radius: 50%;
+  color: var(--stamp-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transform: rotate(-6deg);
+  flex-shrink: 0;
+}

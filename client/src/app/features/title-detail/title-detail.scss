@@ -1,0 +1,167 @@
+.title-detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  img {
+    width: 220px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .info {
+    flex: 1;
+  }
+
+  .media-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--stamp-gold);
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0.2rem 0 0.3rem;
+    max-width: 20ch;
+  }
+
+  .release-date {
+    color: var(--muted-ink);
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+  }
+
+  .overview {
+    max-width: 60ch;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .average-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+
+    .rating-caption {
+      color: var(--muted-ink);
+      font-size: 0.85rem;
+    }
+  }
+
+  .write-review-btn {
+    display: inline-block;
+    padding: 0.7rem 1.3rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.95rem;
+
+    &:hover {
+      background: var(--stamp-gold);
+      color: var(--ink);
+    }
+  }
+}
+
+.reviews {
+  border-top: 2px dashed var(--paper-shade);
+  padding-top: 2rem;
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-state, .loading-state {
+    color: var(--muted-ink);
+  }
+
+  .review {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--paper-shade);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .review-body {
+      flex: 1;
+    }
+
+    .review-header {
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      line-height: 1.55;
+      margin: 0 0 0.5rem;
+    }
+
+    .review-actions {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+
+      a {
+        color: var(--muted-ink);
+        &:hover { color: var(--stamp-gold); }
+      }
+
+      button {
+        background: none;
+        border: none;
+        color: var(--ticket-red);
+        font-size: 0.85rem;
+        padding: 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.watchlist-btn {
+  padding: 0.68rem 1.2rem;
+  background: transparent;
+  border: 1px solid var(--paper-shade);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+
+  &:hover {
+    border-color: var(--stamp-gold);
+  }
+
+  &.active {
+    background: var(--stamp-gold);
+    border-color: var(--stamp-gold);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

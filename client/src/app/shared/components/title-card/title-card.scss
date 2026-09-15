@@ -1,0 +1,71 @@
+.title-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .no-poster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background: var(--paper-shade);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-ink);
+    font-size: 0.85rem;
+  }
+
+  .info {
+    position: relative;
+    padding: 0.9rem 0.9rem 1rem;
+    border-top: 2px dashed var(--paper-shade);
+
+    // Ticket-stub notches at the perforation line
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: -7px;
+      width: 14px;
+      height: 14px;
+      background: var(--paper);
+      border-radius: 50%;
+    }
+    &::before { left: -7px; }
+    &::after { right: -7px; }
+  }
+
+  .media-type {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--stamp-gold);
+    margin-bottom: 0.3rem;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    color: var(--paper);
+    margin-bottom: 0.2rem;
+    line-height: 1.25;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: var(--paper-shade);
+    margin: 0;
+  }
+}

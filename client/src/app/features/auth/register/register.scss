@@ -1,0 +1,65 @@
+.login-container, .register-container {
+  max-width: 380px;
+  margin: 4rem auto;
+  padding: 2rem;
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .field {
+    margin-bottom: 1.1rem;
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted-ink);
+      margin-bottom: 0.35rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid var(--paper-shade);
+      border-radius: var(--radius-sm);
+      background: white;
+    }
+  }
+
+  .error {
+    color: var(--ticket-red);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+
+    &:hover {
+      background: var(--stamp-gold);
+      color: var(--ink);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: var(--muted-ink);
+
+    a {
+      color: var(--stamp-gold);
+    }
+  }
+}
