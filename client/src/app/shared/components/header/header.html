@@ -1,0 +1,15 @@
+<header class="app-header">
+  <a routerLink="/search" class="logo">ReviewPlatform</a>
+
+  <nav>
+    <ng-container *ngIf="authService.currentUser() as user; else guestLinks">
+      <span class="username">{{ user.username }}</span>
+      <button (click)="onLogout()">Logout</button>
+    </ng-container>
+
+    <ng-template #guestLinks>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    </ng-template>
+  </nav>
+</header>

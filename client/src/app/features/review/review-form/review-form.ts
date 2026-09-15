@@ -24,18 +24,24 @@ export class ReviewFormComponent implements OnInit {
 
   isEditMode = signal(false);
   titleId = signal<string | null>(null);
-  reviewId = signal<string | null>(null);
   errorMessage = '';
+
+  private mediaType: string | null = null;
+  private externalId: string | null = null;
 
   ngOnInit(): void {
     const newTitleId = this.route.snapshot.paramMap.get('titleId');
     const editReviewId = this.route.snapshot.paramMap.get('reviewId');
 
+    const navState = this.router.getCurrentNavigation()?.extras.state
+      ?? window.history.state;
+    this.mediaType = navState?.['mediaType'] ?? null;
+    this.externalId = navState?.['externalId'] ?? null;
+
     if (newTitleId) {
       this.titleId.set(newTitleId);
       this.isEditMode.set(false);
     } else if (editReviewId) {
-      this.reviewId.set(editReviewId);
       this.isEditMode.set(true);
       this.loadExistingReview(editReviewId);
     }
@@ -48,14 +54,21 @@ export class ReviewFormComponent implements OnInit {
           rating: res.review.rating,
           text: res.review.text,
         });
-        // review.title is populated as an object when fetched this way
         const titleRef = res.review.title as any;
         this.titleId.set(typeof titleRef === 'string' ? titleRef : titleRef._id);
+        if (typeof titleRef === 'object') {
+          this.mediaType = titleRef.mediaType;
+          this.externalId = titleRef.externalId;
+        }
       },
       error: () => {
         this.errorMessage = 'Could not load review';
       },
     });
+  }
+
+  private reviewId(): string | null {
+    return this.route.snapshot.paramMap.get('reviewId');
   }
 
   onSubmit(): void {
@@ -77,8 +90,10 @@ export class ReviewFormComponent implements OnInit {
   }
 
   private navigateBackToTitle(): void {
-    // We only have the Mongo titleId here, not mediaType/externalId,
-    // so we go back one step in history instead of reconstructing the detail route.
-    this.router.navigateByUrl('/search');
+    if (this.mediaType && this.externalId) {
+      this.router.navigate(['/title', this.mediaType, this.externalId]);
+    } else {
+      this.router.navigateByUrl('/search');
+    }
   }
 }

@@ -9,17 +9,20 @@
         <p class="overview">{{ t.overview }}</p>
 
         <p *ngIf="averageRating() !== null" class="average-rating">
-          Average rating: {{ averageRating() }}/10 ({{ reviews().length }} review{{ reviews().length === 1 ? '' : 's' }})
+          Average rating: {{ averageRating() }}/10 ({{ reviews().length }} review{{
+            reviews().length === 1 ? '' : 's'
+          }})
         </p>
 
-        
-  <a *ngIf="authService.isLoggedIn()"
-  [routerLink]="['/review/new', t._id]"
-  class="write-review-btn"
->
-  Write a review
-</a>
-<a *ngIf="!authService.isLoggedIn()" routerLink="/login">
+        <a
+          *ngIf="authService.isLoggedIn()"
+          [routerLink]="['/review/new', t._id]"
+          [state]="{ mediaType: t.mediaType, externalId: t.externalId }"
+          class="write-review-btn"
+        >
+          Write a review
+        </a>
+        <a *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']" [queryParams]="{ returnUrl: '/title/' + t.mediaType + '/' + t.externalId }">
   Log in to write a review
 </a>
       </div>

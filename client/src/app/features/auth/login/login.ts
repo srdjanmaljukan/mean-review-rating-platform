@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -29,7 +30,10 @@ export class LoginComponent {
     const { email, password } = this.form.value;
 
     this.authService.login(email!, password!).subscribe({
-      next: () => this.router.navigate(['/search']),
+      next: () => {
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/search';
+        this.router.navigateByUrl(returnUrl);
+      },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login failed';
       },
