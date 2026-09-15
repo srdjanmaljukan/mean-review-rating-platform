@@ -1,0 +1,32 @@
+<div class="profile-container" *ngIf="!loading(); else loadingTpl">
+  <ng-container *ngIf="profile() as p; else notFoundTpl">
+    <div class="profile-header">
+      <h1>{{ p.user.username }}</h1>
+      <p class="joined">Member since {{ p.user.createdAt | date: 'MMMM yyyy' }}</p>
+    </div>
+
+    <div class="review-history">
+      <h2>Reviews ({{ p.reviews.length }})</h2>
+
+      <p *ngIf="p.reviews.length === 0" class="empty-state">No reviews yet.</p>
+
+      <div class="review" *ngFor="let review of p.reviews">
+        <span class="rating-stamp">{{ review.rating }}</span>
+        <div class="review-body">
+          <a [routerLink]="['/title', titleRef(review).mediaType, titleRef(review).externalId]" class="title-link">
+            {{ titleRef(review).title }}
+          </a>
+          <p>{{ review.text }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #notFoundTpl>
+    <p class="empty-state">User not found.</p>
+  </ng-template>
+</div>
+
+<ng-template #loadingTpl>
+  <p class="loading-state">Loading...</p>
+</ng-template>

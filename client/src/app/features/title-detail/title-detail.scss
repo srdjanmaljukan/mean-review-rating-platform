@@ -165,3 +165,7 @@
     cursor: not-allowed;
   }
 }
+
+.reviewer-link:hover strong {
+  color: var(--stamp-gold);
+}

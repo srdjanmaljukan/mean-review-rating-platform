@@ -38,5 +38,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./features/watchlist/watchlist').then((m) => m.WatchlistComponent),
   },
+  {
+    path: 'users/:username',
+    loadComponent: () => import('./features/profile/profile').then((m) => m.ProfileComponent),
+  },
   { path: '**', redirectTo: 'search' },
 ];

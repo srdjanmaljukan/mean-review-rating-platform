@@ -4,7 +4,7 @@
   <nav>
     <ng-container *ngIf="authService.currentUser() as user; else guestLinks">
       <a routerLink="/watchlist">Collection</a>
-      <span class="username">{{ user.username }}</span>
+      <a [routerLink]="['/users', user.username]" class="username">{{ user.username }}</a>
       <button (click)="onLogout()">Logout</button>
     </ng-container>
 

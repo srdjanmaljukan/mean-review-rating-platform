@@ -53,7 +53,9 @@
         <span class="rating-stamp">{{ review.rating }}</span>
         <div class="review-body">
           <div class="review-header">
-            <strong>{{ reviewUsername(review) }}</strong>
+            <a [routerLink]="['/users', reviewUsername(review)]" class="reviewer-link">
+              <strong>{{ reviewUsername(review) }}</strong>
+            </a>
           </div>
           <p>{{ review.text }}</p>
           <div class="review-actions" *ngIf="isOwnReview(review)">

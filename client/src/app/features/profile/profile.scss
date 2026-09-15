@@ -1,0 +1,65 @@
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.profile-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--stamp-gold);
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .joined {
+    color: var(--muted-ink);
+    font-size: 0.9rem;
+  }
+}
+
+.review-history {
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-state, .loading-state {
+    color: var(--muted-ink);
+  }
+
+  .review {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--paper-shade);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .review-body {
+      flex: 1;
+    }
+
+    .title-link {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+
+      &:hover {
+        color: var(--stamp-gold);
+      }
+    }
+
+    p {
+      line-height: 1.55;
+      margin: 0;
+      color: var(--muted-ink);
+    }
+  }
+}
