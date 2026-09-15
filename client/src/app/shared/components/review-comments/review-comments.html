@@ -1,0 +1,25 @@
+<div class="review-comments">
+  <button class="toggle-btn" (click)="toggleExpanded()">
+    {{ expanded() ? 'Hide comments' : (comments().length > 0 ? comments().length + ' comment' + (comments().length === 1 ? '' : 's') : 'Add a comment') }}
+  </button>
+
+  <div class="comments-panel" *ngIf="expanded()">
+    <p *ngIf="loading()" class="loading-state">Loading...</p>
+
+    <div class="comment" *ngFor="let comment of comments()">
+      <a [routerLink]="['/users', commentUsername(comment)]" class="commenter-link">
+        {{ commentUsername(comment) }}
+      </a>
+      <p>{{ comment.text }}</p>
+      <button *ngIf="isOwnComment(comment)" class="delete-btn" (click)="deleteComment(comment._id)">Delete</button>
+    </div>
+
+    <div class="comment-form" *ngIf="authService.isLoggedIn()">
+      <textarea [(ngModel)]="newCommentText" placeholder="Write a comment..." rows="2"></textarea>
+      <button (click)="submitComment()" [disabled]="submitting() || !newCommentText.trim()">Post</button>
+    </div>
+    <p *ngIf="!authService.isLoggedIn()" class="login-prompt">
+      <a routerLink="/login">Log in</a> to comment.
+    </p>
+  </div>
+</div>

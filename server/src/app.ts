@@ -5,6 +5,7 @@ import titleRoutes from './routes/title.routes';
 import reviewRoutes from './routes/review.routes';
 import watchlistRoutes from './routes/watchlist.routes';
 import userRoutes from './routes/user.routes';
+import commentRoutes from './routes/comment.routes';
 
 const app: Application = express();
 
@@ -23,6 +24,7 @@ app.use('/api/titles', titleRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/comments', commentRoutes);
 
 
 export default app;

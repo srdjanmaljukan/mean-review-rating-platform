@@ -7,11 +7,12 @@ import { AuthService } from '../../core/services/auth.service';
 import { WatchlistService } from '../../core/services/watchlist.service';
 import { Title, MediaType } from '../../shared/models/title.model';
 import { Review } from '../../shared/models/review.model';
+import { ReviewCommentsComponent } from '../../shared/components/review-comments/review-comments';
 
 @Component({
   selector: 'app-title-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ReviewCommentsComponent],
   templateUrl: './title-detail.html',
   styleUrl: './title-detail.scss',
 })

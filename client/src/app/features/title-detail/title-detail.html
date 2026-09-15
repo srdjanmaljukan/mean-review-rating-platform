@@ -62,6 +62,7 @@
             <a [routerLink]="['/review/edit', review._id]">Edit</a>
             <button (click)="deleteReview(review._id)">Delete</button>
           </div>
+          <app-review-comments [reviewId]="review._id" />
         </div>
       </div>
     </div>
