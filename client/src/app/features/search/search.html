@@ -2,12 +2,39 @@
   <h2>Search movies, TV shows, games, anime & manga</h2>
 
   <div class="search-bar">
-    <input
-      type="text"
-      [(ngModel)]="query"
-      (keyup.enter)="onSearch()"
-      placeholder="Search titles..."
-    />
+    <div class="input-wrapper">
+      <input
+        type="text"
+        [(ngModel)]="query"
+        (input)="onInputChange()"
+        (keyup.enter)="onSearch()"
+        (focus)="query.trim().length >= 2 && showSuggestions.set(true)"
+        (blur)="hideSuggestions()"
+        placeholder="Search titles..."
+        autocomplete="off"
+      />
+
+      <div class="suggestions-dropdown" *ngIf="showSuggestions()">
+        <p *ngIf="suggestionsLoading()" class="suggestions-loading">Loading...</p>
+
+        <button
+          *ngFor="let s of suggestions()"
+          class="suggestion-item"
+          (mousedown)="selectSuggestion(s)"
+        >
+          <img *ngIf="s.posterPath" [src]="s.posterPath" [alt]="s.title" />
+          <div class="no-poster" *ngIf="!s.posterPath"></div>
+          <div class="suggestion-info">
+            <span class="media-type">{{ s.mediaType }}</span>
+            <span class="title">{{ s.title }}</span>
+          </div>
+        </button>
+
+        <p *ngIf="!suggestionsLoading() && suggestions().length === 0" class="no-suggestions">
+          No matches
+        </p>
+      </div>
+    </div>
 
     <select [(ngModel)]="selectedType">
       <option *ngFor="let type of mediaTypes" [value]="type.value">
